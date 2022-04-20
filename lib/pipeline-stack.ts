@@ -146,7 +146,7 @@ export class PipelineStack extends cdk.Stack {
         SELECT 
           CONCAT(employee_first_name, ' ', employee_last_name) employee_full_name, 
           SUM(order_summary) sales_total 
-        FROM 'etl_pipeline'.'orders_master_detail_view' 
+        FROM "etl_pipeline"."raw_orders_master_detail_view"
         GROUP BY CONCAT(employee_first_name, ' ', employee_last_name) 
         ORDER BY sales_total DESC;`,
       description: 'List total sales for each sales person in descending order',
