@@ -4,6 +4,13 @@ import * as cdk from 'aws-cdk-lib';
 import { PipelineStack } from '../lib/pipeline-stack';
 
 const app = new cdk.App();
+
+// Define workflow
+// const workflow_stack = new PipelineStack(app, 'pipeline-stack', {
+//   stackName: 'pipeline-stack',
+//   description: 'Creates the workflow, crawlers, jobs and triggers'
+// });
+
 new PipelineStack(app, 'PipelineStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,

@@ -1,0 +1,57 @@
+Order_Detail_ID,Order_ID,Product_ID,Quantity,Unit_Price,Discount,Status_ID,Date_Allocated,Purchase_Order_ID,Inventory_ID,qty_x_up,sale_grades,product_name
+27,30,34,100,14,0.1,2,,96,83,1400,Great!,Beer
+28,30,80,30,3.5,0.05,2,,,63,105,Below par ...,Dried Plums
+29,31,7,10,30,0.1,2,,,64,300,Below par ...,Dried Pears
+30,31,51,10,53,0,2,,,65,530,Good Work.,Dried Apples
+31,31,80,10,3.5,0.04,2,,,66,35,Below par ...,Dried Plums
+32,32,1,15,18,0,2,,,67,270,Below par ...,Chai
+33,32,43,20,46,0.05,2,,,68,920,Good Work.,Coffee
+34,33,19,30,9.2,0,2,,97,81,276,Below par ...,Chocolate Biscuits Mix
+35,34,19,20,9.2,0.15,2,,,69,184,Below par ...,Chocolate Biscuits Mix
+36,35,48,10,12.75,0,2,,,70,127.5,Below par ...,Chocolate
+37,36,41,200,9.65,0.1,2,,98,79,1930,Great!,Clam Chowder
+38,37,8,17,40,0.07,2,,,71,680,Good Work.,Curry Sauce
+39,38,43,300,46,0,2,,99,77,13800,Great!,Coffee
+40,39,48,100,12.75,0,2,,100,75,1275,Great!,Chocolate
+41,40,81,200,2.99,0,2,,101,73,598,Good Work.,Green Tea
+42,41,43,300,46,0.08,1,,102,104,13800,Great!,Coffee
+43,42,6,10,25,0,2,,,84,250,Below par ...,Boysenberry Spread
+44,42,4,10,22,0,2,,,85,220,Below par ...,Cajun Seasoning
+45,42,19,10,9.2,0,2,,103,110,92,Below par ...,Chocolate Biscuits Mix
+46,43,80,20,3.5,0.12,1,,,86,70,Below par ...,Dried Plums
+47,43,81,50,2.99,0,1,,,87,149.5,Below par ...,Green Tea
+48,44,1,25,18,0,1,,,88,450,Below par ...,Chai
+49,44,43,25,46,0.04,1,,,89,1150,Great!,Coffee
+50,44,81,25,2.99,0,1,,,90,74.75,Below par ...,Green Tea
+51,45,41,50,9.65,0.04,2,,104,116,482.5,Below par ...,Clam Chowder
+52,45,40,50,18.4,0,2,,,91,920,Good Work.,Crab Meat
+53,46,57,100,19.5,0,2,,105,101,1950,Great!,Ravioli
+54,46,72,50,34.8,0,2,,106,114,1740,Great!,Mozzarella
+55,47,34,300,14,0,2,,107,108,4200,Great!,Beer
+56,48,8,25,40,0,2,,108,106,1000,Good Work.,Curry Sauce
+57,48,19,25,9.2,0,2,,109,112,230,Below par ...,Chocolate Biscuits Mix
+59,50,21,20,10,0,2,,,92,200,Below par ...,Scones
+60,51,5,25,21.35,0.15,2,,,93,533.75,Good Work.,Olive Oil
+61,51,41,30,9.65,0,2,,,94,289.5,Below par ...,Clam Chowder
+62,51,40,30,18.4,0.2,2,,,95,552,Good Work.,Crab Meat
+66,56,48,10,12.75,0,2,,111,99,127.5,Below par ...,Chocolate
+67,55,34,87,14,0.02,2,,,117,1218,Great!,Beer
+68,79,7,30,30,0,2,,,119,900,Good Work.,Dried Pears
+69,79,51,30,53,0,2,,,118,1590,Great!,Dried Apples
+70,78,17,40,39,0.03,2,,,120,1560,Great!,Fruit Cocktail
+71,77,6,90,25,0,2,,,121,2250,Great!,Boysenberry Spread
+72,76,4,30,22,0,2,,,122,660,Good Work.,Cajun Seasoning
+73,75,48,40,12.75,0,2,,,123,510,Good Work.,Chocolate
+74,74,48,40,12.75,0,2,,,124,510,Good Work.,Chocolate
+75,73,41,10,9.65,0,2,,,125,96.5,Below par ...,Clam Chowder
+76,72,43,5,46,0,2,,,126,230,Below par ...,Coffee
+77,71,40,40,18.4,0,2,,,127,736,Good Work.,Crab Meat
+78,70,8,20,40,0,2,,,128,800,Good Work.,Curry Sauce
+79,69,80,15,3.5,0.08,2,,,129,52.5,Below par ...,Dried Plums
+80,67,74,20,10,0,2,,,130,200,Below par ...,Almonds
+81,60,72,40,34.8,0,2,,,131,1392,Great!,Mozzarella
+82,63,3,50,10,0,2,,,132,500,Below par ...,Syrup
+83,63,8,3,40,0,2,,,133,120,Below par ...,Curry Sauce
+84,58,20,40,81,0,2,,,134,3240,Great!,Marmalade
+85,58,52,40,7,0,2,,,135,280,Below par ...,Long Grain Rice
+86,80,56,10,38,0,1,,,136,380,Below par ...,Gnocchi
