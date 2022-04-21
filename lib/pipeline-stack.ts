@@ -1,5 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as s3n from 'aws-cdk-lib/aws-s3-notifications'
+import * as sqs from 'aws-cdk-lib/aws-sqs'; 
 import * as s3Deploy from 'aws-cdk-lib/aws-s3-deployment'
 import * as glue from 'aws-cdk-lib/aws-glue';
 import { aws_athena as athena } from 'aws-cdk-lib';
@@ -18,8 +20,8 @@ export class PipelineStack extends cdk.Stack {
     super(scope, id, props);
 
     // S3 Object Keys
-    const landingZonePath = "landing-zone-444";
-    const cleanZonePath = "clean-zone-444";
+    const landingZonePath = "landing-zone-";
+    const cleanZonePath = "clean-zone-";
 
     // Provision bucket for raw data
     const landing_zone_bucket = new  s3.Bucket(this, landingZonePath, {
@@ -27,6 +29,12 @@ export class PipelineStack extends cdk.Stack {
         publicReadAccess: false,
         removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
+
+    // Provision queue to S3 event notifications
+    const queue = new sqs.Queue(this, 'Queue');
+
+    // Send PUT event notifications from clean zone bucket to event queue
+    landing_zone_bucket.addEventNotification(s3.EventType.OBJECT_CREATED_PUT, new s3n.SqsDestination(queue));
 
     // Provision bucket for clean data
     const clean_zone_bucket =new s3.Bucket(this, cleanZonePath, {
@@ -63,6 +71,7 @@ export class PipelineStack extends cdk.Stack {
       role: 'arn:aws:iam::911320291896:role/AWSGlueServiceRoleDefault',
       targets: {
         s3Targets: [{
+          eventQueueArn: queue.queueArn,
           path: raw_data,
         }],
       },
@@ -158,12 +167,9 @@ export class PipelineStack extends cdk.Stack {
       queryString: `
       CREATE TABLE IF NOT EXISTS etl_pipeline.clean_customer_parquet
       WITH (format = 'PARQUET', \
-      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/customer')
-
-      AS
-
+      external_location = 's3://${clean_zone_bucket.bucketName}/customer') AS
       SELECT *
-      FROM etl_pipeline.raw_customer`,
+      FROM etl_pipeline.raw_customer;`,
       description: 'Convert raw customer table to parquet format',
       name: 'customer-csv-to-parquet',
     });
@@ -173,12 +179,9 @@ export class PipelineStack extends cdk.Stack {
       queryString: `
       CREATE TABLE IF NOT EXISTS etl_pipeline.clean_employee_parquet
       WITH (format = 'PARQUET', \
-      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/employee')
-
-      AS
-
+      external_location = 's3://${clean_zone_bucket.bucketName}/employee') AS
       SELECT *
-      FROM etl_pipeline.raw_employee`,
+      FROM etl_pipeline.raw_employee;`,
       description: 'Convert raw employee table to parquet format',
       name: 'employee-csv-to-parquet',
     });
@@ -188,12 +191,9 @@ export class PipelineStack extends cdk.Stack {
       queryString: `
       CREATE TABLE IF NOT EXISTS etl_pipeline.clean_order_details_parquet
       WITH (format = 'PARQUET', \
-      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/order_details')
-
-      AS
-
+      external_location = 's3://${clean_zone_bucket.bucketName}/order_details') AS
       SELECT *
-      FROM etl_pipeline.raw_order_details`,
+      FROM etl_pipeline.raw_order_details;`,
       description: 'Convert raw order details table to parquet format',
       name: 'order_details-csv-to-parquet',
     });
@@ -203,12 +203,9 @@ export class PipelineStack extends cdk.Stack {
       queryString: `
       CREATE TABLE IF NOT EXISTS etl_pipeline.clean_orders_parquet
       WITH (format = 'PARQUET', \
-      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/orders')
-
-      AS
-
+      external_location = 's3://${clean_zone_bucket.bucketName}/orders') AS
       SELECT *
-      FROM etl_pipeline.raw_orders`,
+      FROM etl_pipeline.raw_orders;`,
       description: 'Convert raw orders table to parquet format',
       name: 'orders-csv-to-parquet',
     });
@@ -218,12 +215,9 @@ export class PipelineStack extends cdk.Stack {
       queryString: `
       CREATE TABLE IF NOT EXISTS etl_pipeline.clean_saas_sales_parquet
       WITH (format = 'PARQUET', \
-      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/saas_sales')
-
-      AS
-
+      external_location = 's3://${clean_zone_bucket.bucketName}/saas_sales') AS
       SELECT *
-      FROM etl_pipeline.raw_saas_sales`,
+      FROM etl_pipeline.raw_saas_sales;`,
       description: 'Convert raw saas sales table to parquet format',
       name: 'saas-sales-csv-to-parquet',
     });
@@ -233,12 +227,9 @@ export class PipelineStack extends cdk.Stack {
       queryString: `
       CREATE TABLE IF NOT EXISTS etl_pipeline.clean_superstore_parquet
       WITH (format = 'PARQUET', \
-      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/superstore')
-
-      AS
-
+      external_location = 's3://${clean_zone_bucket.bucketName}/superstore') AS
       SELECT *
-      FROM etl_pipeline.raw_superstore`,
+      FROM etl_pipeline.raw_superstore;`,
       description: 'Convert raw superstore table to parquet format',
       name: 'superstore-csv-to-parquet',
     });
