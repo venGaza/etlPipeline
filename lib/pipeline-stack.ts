@@ -86,7 +86,7 @@ export class PipelineStack extends cdk.Stack {
 
     // Create named views and queries in Athena (CfnNamedQuery)
     const athena_order_view_1 = new athena.CfnNamedQuery(this, 'athena-view-1', {
-      database: 'etl-pipeline',
+      database: 'etl_pipeline',
       queryString: `
       CREATE OR REPLACE VIEW "raw_orders_master_view" AS 
       SELECT
@@ -118,7 +118,7 @@ export class PipelineStack extends cdk.Stack {
     });
 
     const athena_order_view_2 = new athena.CfnNamedQuery(this, 'athena-view-2', {
-      database: 'etl-pipeline',
+      database: 'etl_pipeline',
       queryString: `
       CREATE OR REPLACE VIEW "raw_orders_master_detail_view" AS 
       SELECT
@@ -141,20 +141,136 @@ export class PipelineStack extends cdk.Stack {
     });
 
     const athena_query_1 = new athena.CfnNamedQuery(this, 'athena-query-1', {
-      database: 'etl-pipeline',
+      database: 'etl_pipeline',
       queryString: `
-        SELECT 
-          CONCAT(employee_first_name, ' ', employee_last_name) employee_full_name, 
-          SUM(order_summary) sales_total 
-        FROM "etl_pipeline"."raw_orders_master_detail_view"
-        GROUP BY CONCAT(employee_first_name, ' ', employee_last_name) 
-        ORDER BY sales_total DESC;`,
+      SELECT 
+        CONCAT(employee_first_name, ' ', employee_last_name) employee_full_name, 
+        SUM(order_summary) sales_total 
+      FROM "etl_pipeline"."raw_orders_master_detail_view"
+      GROUP BY CONCAT(employee_first_name, ' ', employee_last_name) 
+      ORDER BY sales_total DESC;`,
       description: 'List total sales for each sales person in descending order',
       name: 'order-total-by-salesperson-cdk',
     });
 
+    const athena_parquet_query_1 = new athena.CfnNamedQuery(this, 'athena-parquet-query-1', {
+      database: 'etl_pipeline',
+      queryString: `
+      CREATE TABLE IF NOT EXISTS etl_pipeline.clean_customer_parquet
+      WITH (format = 'PARQUET', \
+      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/customer')
+
+      AS
+
+      SELECT *
+      FROM etl_pipeline.raw_customer`,
+      description: 'Convert raw customer table to parquet format',
+      name: 'customer-csv-to-parquet',
+    });
+
+    const athena_parquet_query_2 = new athena.CfnNamedQuery(this, 'athena-parquet-query-2', {
+      database: 'etl_pipeline',
+      queryString: `
+      CREATE TABLE IF NOT EXISTS etl_pipeline.clean_employee_parquet
+      WITH (format = 'PARQUET', \
+      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/employee')
+
+      AS
+
+      SELECT *
+      FROM etl_pipeline.raw_employee`,
+      description: 'Convert raw employee table to parquet format',
+      name: 'employee-csv-to-parquet',
+    });
+
+    const athena_parquet_query_3 = new athena.CfnNamedQuery(this, 'athena-parquet-query-3', {
+      database: 'etl_pipeline',
+      queryString: `
+      CREATE TABLE IF NOT EXISTS etl_pipeline.clean_order_details_parquet
+      WITH (format = 'PARQUET', \
+      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/order_details')
+
+      AS
+
+      SELECT *
+      FROM etl_pipeline.raw_order_details`,
+      description: 'Convert raw order details table to parquet format',
+      name: 'order_details-csv-to-parquet',
+    });
+
+    const athena_parquet_query_4 = new athena.CfnNamedQuery(this, 'athena-parquet-query-4', {
+      database: 'etl_pipeline',
+      queryString: `
+      CREATE TABLE IF NOT EXISTS etl_pipeline.clean_orders_parquet
+      WITH (format = 'PARQUET', \
+      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/orders')
+
+      AS
+
+      SELECT *
+      FROM etl_pipeline.raw_orders`,
+      description: 'Convert raw orders table to parquet format',
+      name: 'orders-csv-to-parquet',
+    });
+
+    const athena_parquet_query_5 = new athena.CfnNamedQuery(this, 'athena-parquet-query-5', {
+      database: 'etl_pipeline',
+      queryString: `
+      CREATE TABLE IF NOT EXISTS etl_pipeline.clean_saas_sales_parquet
+      WITH (format = 'PARQUET', \
+      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/saas_sales')
+
+      AS
+
+      SELECT *
+      FROM etl_pipeline.raw_saas_sales`,
+      description: 'Convert raw saas sales table to parquet format',
+      name: 'saas-sales-csv-to-parquet',
+    });
+
+    const athena_parquet_query_6 = new athena.CfnNamedQuery(this, 'athena-parquet-query-6', {
+      database: 'etl_pipeline',
+      queryString: `
+      CREATE TABLE IF NOT EXISTS etl_pipeline.clean_superstore_parquet
+      WITH (format = 'PARQUET', \
+      external_location = 's3://pipelinestack-cleanzone44438468b69-ke2qzgrb2w4r/superstore')
+
+      AS
+
+      SELECT *
+      FROM etl_pipeline.raw_superstore`,
+      description: 'Convert raw superstore table to parquet format',
+      name: 'superstore-csv-to-parquet',
+    });
+
 /////////////////////////////// TESTING ///////////////////////////////////////////////////
     
+    //crawl csv files located in S3 scripts folder
+    // const glue_trigger_crawlJob = new glue.CfnTrigger(
+    //   this,
+    //   "glue-trigger-clean-crawlJob",
+    //   {
+    //     name: "Run-Crawler-" + landingZoneCrawler.name,
+    //     workflowName: glue_workflow.name,
+    //     actions: [
+    //       {
+    //         crawlerName: landingZoneCrawler.name,
+    //       },
+    //     ],
+    //     predicate: {
+    //       conditions: [
+    //         {
+    //           logicalOperator: "EQUALS",
+    //           jobName: glue_job_asset.name,
+    //           state: "SUCCEEDED",
+    //         },
+    //       ],
+    //       logical: "ANY",
+    //     },
+    //     type: "CONDITIONAL",
+    //     startOnCreation: true,
+    //   }
+    // );
 
     // // Glue trigger
     // const lzCrawlerSchedule: glue.CfnCrawler.ScheduleProperty = {
