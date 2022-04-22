@@ -28,6 +28,7 @@ export class PipelineStack extends cdk.Stack {
         versioned: true,
         publicReadAccess: false,
         removalPolicy: cdk.RemovalPolicy.DESTROY,
+        autoDeleteObjects: true,
     });
 
     // Provision queue to S3 event notifications
@@ -41,6 +42,7 @@ export class PipelineStack extends cdk.Stack {
       versioned: true,
       publicReadAccess: false,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
     })
 
     // Upload test data into landing zone bucket
