@@ -1,10 +1,4 @@
-# Welcome to your CDK TypeScript project
-
-This is a blank project for TypeScript development with CDK.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-# Focus on writing good documentation.
+# CDK Template to stand up a simple ETL Pipeline.
 {: .fs-9 }
 
 Just the Docs gives your documentation a jumpstart with a responsive Jekyll theme that is easily customizable and hosted on GitHub Pages.
@@ -14,7 +8,13 @@ Just the Docs gives your documentation a jumpstart with a responsive Jekyll them
 
 ---
 
-## Useful commands
+## Project
+
+## Features
+
+## Installation
+
+### Useful commands
 
 * `npm run build`   compile typescript to js
 * `npm run watch`   watch for changes and compile
@@ -22,3 +22,4 @@ Just the Docs gives your documentation a jumpstart with a responsive Jekyll them
 * `cdk deploy`      deploy this stack to your default AWS account/region
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template
+
