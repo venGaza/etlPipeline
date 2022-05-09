@@ -1,35 +1,84 @@
 # Cloud Development Kit ETL Pipeline.
 {: .fs-9 }
 
-Just the Docs gives your documentation a jumpstart with a responsive Jekyll theme that is easily customizable and hosted on GitHub Pages.
+An extensible CDK ETL pipeline template written in TypeScript to help speed up the data engineering transformation process.
 {: .fs-6 .fw-300 }
 
-[Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [View it on GitHub](https://github.com/just-the-docs/just-the-docs){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Get started now](#Project){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [View it on GitHub](https://github.com/venGaza/etlPipeline){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 ## Project
+Data engineering is the most time consuming process of any data analytics or machine learning project which invovles the collection, storage, processing, analysis, and visualization of data. Raw data is typically of no use to businesses until it has been transformed/cleaned.  This project aims to provide a template to help data engineers and data scientists provision a robust ETL pipeline through the AWS CDK using TypeScript and AWS Glue. Below is the default architecture for this pipeline:  
+
 
 <p align="center"><img src="assets/architecture.jpg"></p>
 
-
 ## Features
 
+* Optimize raw data for analytics by automatically transforming CSV, JSON, and XML documents into a compressed Parquet format.
+* This template is built to be modular.  Need another transformation or another stage in the pipeline? Just add another Glue job into the workflow or create another workflow from the existing template. 
+* Remove PII (Coming soon)
+{: .label .label-yellow }
+* Partition the documents by datetime column (Coming soon)
+{: .label .label-yellow }
 
 
 ## Installation
 
+### AWS CLI
+1. Clone the project to the local file directory using the AWS Cloudshell
+```bash
+$ git clone https://github.com/venGaza/etlPipeline 
+```
+** Note this project can be downloaded to local computer but make sure to have the following dependencies installed: AWS CLI, Node, CDK(NPM Package)
+
+2. Provision the resources required by CDK (S3 bucket, IAM roles, etc.)
+```bash
+$ cdk bootstrap
+```
+
+3. Move into the file directory and deploy the CDK application
+```bash
+$ cdk deploy
+```
+
+4. There should be an output indicating in the CLI indicating a successful deployment of the stack. Verify the new stack exists:
+```bash
+$ aws cloudformation list-stacks
+```
+
+5. (Optional )Navigate to the CloudFormation Console in the AWS Console. The etlPipeline stack should be viewable. 
+
+## Uninstall
+### AWS Console
+1. Navigate to the CloudFormation Console in the AWS Console.
+2. Select the name of the stack.
+3. Press the delete button located at the top of the list of stacks.
+
+### AWS CloudShell
+1. Run the following command in the AWS CLI from within the application directory
+```bash
+$ cdk destroy
+```
+
+2. There should be an output confirming the successful deletion of the stack. Verify the stack no longer exists:
+```bash
+$ aws cloudformation list-stacks 
+```
+
 ### Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
 * `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
-
+* `cdk destroy`     destroy this stack
+* `cdk bootstrap`   provision resources for cdk
+* `aws cloudformation list-stacks`        compare deployed stack with current state
 
 
 ## About
 
+#### Thank you to the other contributors to this project
+- Tom Anson
+- Sahid Patel
+- Reuben Mackintosh
 
+etlPipeline is &copy; 2022
