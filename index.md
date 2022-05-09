@@ -1,5 +1,5 @@
 # Cloud Development Kit ETL Pipeline.
-{: .fs-9 }
+{: .fs-9 .no_toc}
 
 An extensible CDK ETL pipeline template written in TypeScript to help speed up the data engineering transformation process. THIS IS A TEST!
 {: .fs-6 .fw-300 }
@@ -74,7 +74,7 @@ $ cdk destroy
 $ aws cloudformation list-stacks 
 ```
 
-### Useful commands
+## Useful commands
 * `cdk deploy`      deploy this stack to your default AWS account/region
 * `cdk destroy`     destroy this stack
 * `cdk bootstrap`   provision resources for cdk
