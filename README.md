@@ -8,6 +8,15 @@ An extensible CDK ETL pipeline template written in TypeScript to help speed up t
 
 ---
 
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+
 ## Project
 Data engineering is the most time consuming process of any data analytics or machine learning project which invovles the collection, storage, processing, analysis, and visualization of data. Raw data is typically of no use to businesses until it has been transformed/cleaned.  This project aims to provide a template to help data engineers and data scientists provision a robust ETL pipeline through the AWS CDK using TypeScript and AWS Glue. 
 
