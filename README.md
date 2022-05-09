@@ -10,11 +10,12 @@ Just the Docs gives your documentation a jumpstart with a responsive Jekyll them
 
 ## Project
 
----
+<p align="center"><img src="assets/architecture.jpg"></p>
+
 
 ## Features
 
----
+
 
 ## Installation
 
@@ -27,8 +28,8 @@ Just the Docs gives your documentation a jumpstart with a responsive Jekyll them
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template
 
----
+
 
 ## About
 
----
+
