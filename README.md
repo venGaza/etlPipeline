@@ -1,4 +1,4 @@
-# Cloud Development Kit ETL Pipeline.
+# Cloud Development Kit ETL Pipeline
 
 An extensible CDK ETL pipeline template written in TypeScript to help speed up the data engineering transformation process.
 
