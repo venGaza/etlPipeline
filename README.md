@@ -9,9 +9,9 @@ An extensible CDK ETL pipeline template written in TypeScript to help speed up t
 ---
 
 ## Project
-Data engineering is the most time consuming process of any data analytics or machine learning project which invovles the collection, storage, processing, analysis, and visualization of data. Raw data is typically of no use to businesses until it has been transformed/cleaned.  This project aims to provide a template to help data engineers and data scientists provision a robust ETL pipeline through the AWS CDK using TypeScript and AWS Glue. Below is the default architecture for this pipeline:  
+Data engineering is the most time consuming process of any data analytics or machine learning project which invovles the collection, storage, processing, analysis, and visualization of data. Raw data is typically of no use to businesses until it has been transformed/cleaned.  This project aims to provide a template to help data engineers and data scientists provision a robust ETL pipeline through the AWS CDK using TypeScript and AWS Glue. 
 
-
+### AWS ETL Architecture  
 <p align="center"><img src="assets/architecture.jpg"></p>
 
 ## Features
@@ -19,9 +19,7 @@ Data engineering is the most time consuming process of any data analytics or mac
 * Optimize raw data for analytics by automatically transforming CSV, JSON, and XML documents into a compressed Parquet format.
 * This template is built to be modular.  Need another transformation or another stage in the pipeline? Just add another Glue job into the workflow or create another workflow from the existing template. 
 * Remove PII (Coming soon)
-{: .label .label-yellow }
 * Partition the documents by datetime column (Coming soon)
-{: .label .label-yellow }
 
 
 ## Installation
@@ -73,12 +71,16 @@ $ aws cloudformation list-stacks
 * `cdk bootstrap`   provision resources for cdk
 * `aws cloudformation list-stacks`        compare deployed stack with current state
 
-
 ## About
+
+etlPipeline is &copy; 2022
+
+### Contributing
+
+When contributing to this repository, please first discuss the change you wish to make via issue,
+email, or any other method with the owners of this repository before making a change.
 
 #### Thank you to the other contributors to this project
 - Tom Anson
 - Sahid Patel
 - Reuben Mackintosh
-
-etlPipeline is &copy; 2022
